@@ -12,13 +12,15 @@ const Home: NextPage = () => {
 
   const addressSubmittedHandler = (address: string) => {
     setAddress(address)
-    const key = new Web3.PublicKey(address)
+    const key = new Web3.PublicKey(address) // <-- then/catch doesn't catch error here from invalid address
     const connection = new Web3.Connection(Web3.clusterApiUrl('devnet'))
     connection.getBalance(key)
     .then(balance => {
-        setBalance(balance)
+        setBalance(balance / Web3.LAMPORTS_PER_SOL)
     })
-    .catch(err => { throw err })
+    .catch(error => {
+        throw error
+    })
   }
 
   return (
