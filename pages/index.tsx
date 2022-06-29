@@ -7,7 +7,7 @@ import AddressForm from '../components/AddressForm'
 import * as Web3 from '@solana/web3.js'
 
 const Home: NextPage = () => {
-  const [balance, setBalance] = useState(0)
+  const [balance, setBalance] = useState<number|string>(0) // <-- Typescripting!
   const [address, setAddress] = useState('')
 
   const addressSubmittedHandler = (address: string) => {
@@ -19,10 +19,10 @@ const Home: NextPage = () => {
         .then(bal => {
             setBalance(bal / Web3.LAMPORTS_PER_SOL)
         })
-    } catch (error) {
-        setAddress('Invalid address')
-        setBalance(0)
-        alert(error)
+    } catch (err) {
+        setAddress(`${err}`) // <-- 🤓
+        setBalance('Invalid') // <-- cuz Typescripting!
+        alert(err)
     }
   }
 
