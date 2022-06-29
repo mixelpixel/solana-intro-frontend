@@ -10,6 +10,7 @@ function AddressForm(props: { handler: (address: string) => void }) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     props.handler(values.address)
+    // console.log("values:", values)
   };
 
   const handleAddressInputChange = (event: ChangeEvent<HTMLInputElement>) => {
